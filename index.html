@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umair Hassan's Portfolio</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2gFLS_t3c3TfK11Fv+xWpG0c7v9s4/v7sPj1a" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom style block for a clean look -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Hide all page sections by default */
+        .page-section {
+            display: none;
+        }
+        /* Show the active page */
+        .page-section.active {
+            display: block;
+        }
+        /* Style for the active navigation link */
+        .nav-link.active {
+            color: #67e8f9; /* Cyan for dark theme */
+            font-weight: 600;
+        }
+        /* Style for the active navigation link in light theme */
+        body.light-theme .nav-link.active {
+            color: #fbbf24; /* Amber for light theme */
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200">
+    <!-- Header section with navigation links -->
+    <header class="p-4 md:p-6 flex justify-between items-center bg-slate-900 border-b border-slate-700 sticky top-0 z-50 transition-colors duration-500">
+        <!-- 
+            The `id` is used by JavaScript to change the text content.
+            The responsive classes ensure the font size is appropriate for all devices.
+        -->
+        <h1 class="text-xl md:text-2xl font-bold text-cyan-300" id="header-initials">UHD</h1>
+        <!-- Hamburger menu for mobile view -->
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-slate-400 hover:text-cyan-300 transition-colors">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Desktop navigation -->
+        <nav id="desktop-nav" class="hidden md:flex gap-4 items-center">
+            <button onclick="showPage('about-me', this)" class="nav-link active hover:text-cyan-300 transition-colors">About Me</button>
+            <button onclick="showPage('education', this)" class="nav-link hover:text-cyan-300 transition-colors">Education</button>
+            <button onclick="showPage('achievements', this)" class="nav-link hover:text-cyan-300 transition-colors">Achievements</button>
+            <span class="text-slate-500">|</span>
+            <button onclick="showPage('services', this)" class="nav-link hover:text-amber-500 transition-colors text-slate-400">Services</button>
+            <button onclick="showPage('contact', this)" class="nav-link hover:text-amber-500 transition-colors text-slate-400">Contact</button>
+        </nav>
+    </header>
+
+    <!-- Mobile dropdown menu -->
+    <nav id="mobile-menu" class="hidden md:hidden flex-col bg-slate-800 text-slate-200 border-b border-slate-700 p-4 transition-colors duration-500">
+        <button onclick="showPage('about-me', this)" class="nav-link text-left p-2 rounded hover:bg-slate-700 transition-colors">About Me</button>
+        <button onclick="showPage('education', this)" class="nav-link text-left p-2 rounded hover:bg-slate-700 transition-colors">Education</button>
+        <button onclick="showPage('achievements', this)" class="nav-link text-left p-2 rounded hover:bg-slate-700 transition-colors">Achievements</button>
+        <hr class="my-2 border-slate-700" />
+        <button onclick="showPage('services', this)" class="nav-link text-left p-2 rounded hover:bg-slate-700 transition-colors">Services</button>
+        <button onclick="showPage('contact', this)" class="nav-link text-left p-2 rounded hover:bg-slate-700 transition-colors">Contact</button>
+    </nav>
+    
+    <main class="container mx-auto p-4 md:p-8">
+        <!-- About Me Section -->
+        <section id="about-me" class="page-section active pt-8 md:pt-16">
+            <div class="flex flex-col items-center gap-8 md:gap-16">
+                <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-lg border-4 border-cyan-300">
+                    <img src="https://placehold.co/400x400/1e293b/a5f3fc?text=UH" alt="Profile" class="w-full h-full object-cover" />
+                </div>
+                <div class="text-center">
+                    <h2 class="text-4xl md:text-6xl font-extrabold mb-2 text-white">
+                        I'm <span class="text-cyan-300">Umair Hassan</span>.
+                    </h2>
+                    <p class="text-lg md:text-2xl text-slate-400 font-medium mb-4">BS Artificial Intelligence Student</p>
+                    <p class="max-w-2xl text-md md:text-lg text-slate-300 mx-auto">
+                        I am an AI student and a passionate Windows Application Developer, specializing in Java (JavaFX, Maven, Apache POI), Python, and C. My goal is to become a professional AI, ML, and Robotics Engineer.
+                    </p>
+                    <div class="mt-6 flex justify-center gap-6">
+                        <a href="https://github.com/iamuhd" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                            <i class="fa-brands fa-github text-2xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/umair-hassan-296261341/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                            <i class="fa-brands fa-linkedin text-2xl"></i>
+                        </a>
+                        <a href="mailto:udhaunroo@gmail.com" class="hover:text-white transition-colors">
+                            <i class="fa-solid fa-envelope text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Get In Touch</h2>
+                <p class="max-w-2xl mx-auto text-md md:text-lg text-slate-300 mb-8">
+                    I'm currently seeking new opportunities and challenges. If you have a project in mind, want to collaborate, or just want to say hi, feel free to reach out!
+                </p>
+                <a href="https://wa.me/923191021965" target="_blank" rel="noopener noreferrer" class="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
+                    Say Hello
+                </a>
+            </div>
+        </section>
+
+        <!-- Education & Skills Section -->
+        <section id="education" class="page-section pt-16 md:pt-24">
+            <div class="flex items-center justify-center gap-3 mb-8">
+                <i class="fa-solid fa-graduation-cap text-cyan-300 text-3xl"></i>
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white">Education & Skills</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 md:col-span-1 lg:col-span-1">
+                    <h4 class="text-2xl font-semibold mb-4 text-cyan-300">My Education</h4>
+                    <div class="space-y-6">
+                        <div class="border-b border-slate-700 pb-4 last:border-b-0">
+                            <h5 class="text-xl font-bold text-white">Bachelors of Science in Artificial Intelligence</h5>
+                            <p class="text-slate-400">IQRA University, Main Campus | 2024-Present</p>
+                            <p class="text-sm text-slate-500 mt-1">Current CGPA: 3.49</p>
+                        </div>
+                        <div class="border-b border-slate-700 pb-4 last:border-b-0">
+                            <h5 class="text-xl font-bold text-white">Intermediate-Pre Medical</h5>
+                            <p class="text-slate-400">Bahria College, DHA Campus | 2022-2024</p>
+                            <p class="text-sm text-slate-500 mt-1">Board of Intermediate Education Karachi</p>
+                        </div>
+                        <div class="border-b border-slate-700 pb-4 last:border-b-0">
+                            <h5 class="text-xl font-bold text-white">Matriculation-Science</h5>
+                            <p class="text-slate-400">Community Based High School, TandoJam | 2020-2022</p>
+                            <p class="text-sm text-slate-500 mt-1">Board of Intermediate and Secondary Education Hyderabad</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 md:col-span-1 lg:col-span-2">
+                    <h4 class="text-2xl font-semibold mb-4 text-cyan-300">Skills & Technologies</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="text-xl font-semibold mb-2 text-white">Programming</h5>
+                            <ul class="list-disc list-inside space-y-1 text-slate-300">
+                                <li>JAVA</li>
+                                <li>C</li>
+                                <li>PYTHON</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-xl font-semibold mb-2 text-white">Web Development</h5>
+                            <ul class="list-disc list-inside space-y-1 text-slate-300">
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JS (Jquery)</li>
+                                <li>Web Frontend Development and Web Designing</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-xl font-semibold mb-2 text-white">Software & Tools</h5>
+                            <ul class="list-disc list-inside space-y-1 text-slate-300">
+                                <li>Microsoft Office Suite (2019 & 365)</li>
+                                <li>Microsoft Excel</li>
+                                <li>Microsoft Data Handling and Query</li>
+                                <li>NI Electronics Circuit Designing and Visualizing Tools</li>
+                                <li>Adobe Designing Suit</li>
+                                <li>Canva</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-xl font-semibold mb-2 text-white">Other Proficiencies</h5>
+                            <ul class="list-disc list-inside space-y-1 text-slate-300">
+                                <li>Electronic Circuits</li>
+                                <li>DC and AC circuits</li>
+                                <li>Project Documentation and Report</li>
+                                <li>Leadership in Coding Projects</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="page-section pt-16 md:pt-24">
+            <div class="flex items-center justify-center gap-3 mb-8">
+                <i class="fa-solid fa-trophy text-cyan-300 text-3xl"></i>
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white">My Achievements</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-bold text-cyan-300 mb-2">QuickStart: From Algorithm Design to Working Prototype</h3>
+                    <p class="text-slate-400 mb-2">An online non-credit course authorized by HEC, Pakistan.</p>
+                    <p class="text-sm text-slate-500">July 2025</p>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-bold text-cyan-300 mb-2">IOT for Everyone</h3>
+                    <p class="text-slate-400 mb-2">An online non-credit course authorized by HEC, Pakistan.</p>
+                    <p class="text-sm text-slate-500">July 2025</p>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-bold text-cyan-300 mb-2">AI Developer Professional Certificate (IBM)</h3>
+                    <p class="text-slate-400 mb-2">Ongoing professional certificate from IBM.</p>
+                    <p class="text-sm text-slate-500">ONGOING</p>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-bold text-cyan-300 mb-2">Generative AI Engineering Professional Certificate (IBM)</h3>
+                    <p class="text-slate-400 mb-2">Ongoing professional certificate from IBM.</p>
+                    <p class="text-sm text-slate-500">ONGOING</p>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-bold text-cyan-300 mb-2">Foundation of Cyber Security Course Certificate</h3>
+                    <p class="text-slate-400 mb-2">Course certificate from Google.</p>
+                    <p class="text-sm text-slate-500">August 2025</p>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-bold text-cyan-300 mb-2">Introduction to Python Course Certificate</h3>
+                    <p class="text-slate-400 mb-2">Course certificate from the University of Pennsylvania.</p>
+                    <p class="text-sm text-slate-500">August 2025</p>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-bold text-cyan-300 mb-2">Introduction to Programming with Python and Java</h3>
+                    <p class="text-slate-400 mb-2">Specialized certificate from the University of Pennsylvania.</p>
+                    <p class="text-sm text-slate-500">ONGOING</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services & Projects Section -->
+        <section id="services" class="page-section pt-16 md:pt-24 bg-slate-200 text-zinc-800 hidden-section">
+            <div class="flex items-center justify-center gap-3 mb-8">
+                <i class="fa-solid fa-briefcase text-amber-500 text-3xl"></i>
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-zinc-900">Services</h2>
+            </div>
+            <div class="max-w-4xl mx-auto text-center mb-12">
+                <h3 class="text-5xl font-extrabold tracking-wide text-amber-500 mb-2">ع Studios</h3>
+                <p class="text-zinc-600">
+                    Welcome to ع Studios, where we bring your digital ideas to life. We specialize in creating robust Windows desktop applications, visually appealing front-end websites, and providing professional project documentation to ensure clarity and success. Our experience ranges from banking applications to community platforms and food delivery websites.
+                </p>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-zinc-900 mb-8">My Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
+                    <div class="flex items-center mb-4 text-amber-500">
+                        <i class="fa-solid fa-wrench text-2xl"></i>
+                        <h3 class="text-xl font-bold ml-3">Windows App Development</h3>
+                    </div>
+                    <p class="text-slate-300">Developing robust desktop applications for the Windows platform using JavaFX, Apache POI, and other Java libraries.</p>
+                </div>
+                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
+                    <div class="flex items-center mb-4 text-amber-500">
+                        <i class="fa-solid fa-briefcase text-2xl"></i>
+                        <h3 class="text-xl font-bold ml-3">Project Documentation</h3>
+                    </div>
+                    <p class="text-slate-300">Providing detailed and professional project documentation and reports for a clear understanding of the project scope and functionality.</p>
+                </div>
+                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
+                    <div class="flex items-center mb-4 text-amber-500">
+                        <i class="fa-solid fa-wrench text-2xl"></i>
+                        <h3 class="text-xl font-bold ml-3">Front End Development</h3>
+                    </div>
+                    <p class="text-slate-300">Creating visually appealing and functional websites using a combination of HTML, CSS, and JavaScript with jQuery.</p>
+                </div>
+            </div>
+            <hr class="my-16 border-amber-500" />
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">Projects</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
+                    <img src="https://placehold.co/600x400/292524/e7e5e4?text=Banking+App" alt="Windows Banking Application" class="w-full rounded-lg mb-4" />
+                    <h3 class="text-xl font-bold text-amber-500 mb-2">Windows Banking Application</h3>
+                    <p class="text-slate-300 mb-4">A Windows desktop application for banking, developed using Java (JavaFX and apache.poi).</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                        View Project
+                    </a>
+                </div>
+                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
+                    <img src="https://placehold.co/600x400/292524/e7e5e4?text=Wish+Dish+Website" alt="Wish Dish Food Delivery Website" class="w-full rounded-lg mb-4" />
+                    <h3 class="text-xl font-bold text-amber-500 mb-2">Wish Dish Food Delivery Website</h3>
+                    <p class="text-slate-300 mb-4">A food and fast food delivery service website, built using HTML, CSS, and JavaScript (jQuery).</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                        View Project
+                    </a>
+                </div>
+                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
+                    <img src="https://placehold.co/600x400/292524/e7e5e4?text=Skill+Sharing+App" alt="Skill Sharing Community Platform" class="w-full rounded-lg mb-4" />
+                    <h3 class="text-xl font-bold text-amber-500 mb-2">Skill Sharing Community Platform</h3>
+                    <p class="text-slate-300 mb-4">A Windows app for a skill-sharing community, built with Java (JavaFX).</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                        View Project
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="page-section pt-16 md:pt-24 text-center bg-slate-200 text-zinc-800 hidden-section">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <i class="fa-solid fa-phone text-amber-500 text-3xl"></i>
+                <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">To Avail Services</h2>
+            </div>
+            <p class="max-w-2xl mx-auto text-md md:text-lg text-zinc-600 mb-8">
+                Please fill out the form below to get in touch about a project or service.
+            </p>
+            <div class="mt-16 md:mt-24 max-w-xl mx-auto bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 text-left">
+                <form 
+                    action="https://formspree.io/f/movlyjpw"
+                    method="POST" 
+                    class="space-y-4"
+                >
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-amber-500 mb-1">Your Email</label>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            id="email" 
+                            required 
+                            class="w-full p-2 rounded-lg bg-zinc-700 text-slate-200 border border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500" 
+                            placeholder="you@example.com"
+                        />
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-amber-500 mb-1">Message</label>
+                        <textarea 
+                            name="message" 
+                            id="message" 
+                            rows="4" 
+                            required 
+                            class="w-full p-2 rounded-lg bg-zinc-700 text-slate-200 border border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500" 
+                            placeholder="Hi Jane, I'd like to talk about..."
+                        ></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button 
+                            type="submit" 
+                            class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg"
+                        >
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-4 md:p-6 text-center text-sm text-slate-500 border-t border-slate-700 mt-16 md:mt-24 transition-colors duration-500">
+        &copy; 2025 Umair Hassan. All rights reserved.
+    </footer>
+
+    <!-- JavaScript for page navigation and mobile menu -->
+    <script>
+        // Get elements for mobile menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const allNavButtons = document.querySelectorAll('.nav-link');
+
+        // Function to toggle the mobile menu's visibility
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Add event listener to the mobile menu button
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        // This function handles the page navigation logic.
+        function showPage(pageId, button) {
+            // Close the mobile menu if it's open
+            if (!mobileMenu.classList.contains('hidden')) {
+                toggleMobileMenu();
+            }
+
+            // Get all page sections and hide them.
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Show the selected page.
+            document.getElementById(pageId).classList.add('active');
+
+            // Handle header initials change
+            const headerInitials = document.getElementById('header-initials');
+            if (pageId === 'services' || pageId === 'contact') {
+                headerInitials.textContent = 'ع Studios';
+            } else {
+                headerInitials.textContent = 'UHD';
+            }
+
+            // Handle theme changes for Services and Contact pages
+            const isLightPage = pageId === 'services' || pageId === 'contact';
+            const body = document.body;
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+
+            if (isLightPage) {
+                body.classList.add('light-theme');
+                body.classList.remove('bg-slate-900', 'text-slate-200');
+                body.classList.add('bg-slate-200', 'text-zinc-800');
+                
+                header.classList.remove('bg-slate-900', 'border-slate-700');
+                header.classList.add('bg-slate-200', 'border-slate-300');
+
+                headerInitials.classList.remove('text-cyan-300');
+                headerInitials.classList.add('text-zinc-800');
+
+                allNavButtons.forEach(link => {
+                    link.classList.remove('text-cyan-300', 'text-slate-400');
+                    link.classList.add('text-zinc-600');
+                });
+
+                footer.classList.remove('text-slate-500', 'border-slate-700');
+                footer.classList.add('text-zinc-600', 'border-slate-300');
+                
+            } else {
+                body.classList.remove('light-theme');
+                body.classList.remove('bg-slate-200', 'text-zinc-800');
+                body.classList.add('bg-slate-900', 'text-slate-200');
+
+                header.classList.remove('bg-slate-200', 'border-slate-300');
+                header.classList.add('bg-slate-900', 'border-slate-700');
+
+                headerInitials.classList.remove('text-zinc-800');
+                headerInitials.classList.add('text-cyan-300');
+
+                allNavButtons.forEach(link => {
+                    link.classList.remove('text-zinc-600', 'text-amber-500');
+                    link.classList.add('text-slate-400');
+                });
+                // Ensure the Services and Contact links retain their original styling on non-light pages
+                const servicesLink = document.querySelector('.nav-link[onclick*="services"]');
+                const contactLink = document.querySelector('.nav-link[onclick*="contact"]');
+                servicesLink.classList.remove('text-slate-400');
+                servicesLink.classList.add('text-amber-500');
+                contactLink.classList.remove('text-slate-400');
+                contactLink.classList.add('text-amber-500');
+
+                footer.classList.remove('text-zinc-600', 'border-slate-300');
+                footer.classList.add('text-slate-500', 'border-slate-700');
+            }
+            
+            // Remove active class from all links and add it to the clicked one.
+            const allNavLinks = document.querySelectorAll('.nav-link');
+            allNavLinks.forEach(link => link.classList.remove('active'));
+            button.classList.add('active');
+        }
+
+        // Initialize the icons on page load.
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Initially activate the About Me button
+            const initialButton = document.querySelector('.nav-link[onclick*="about-me"]');
+            if (initialButton) {
+                initialButton.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
