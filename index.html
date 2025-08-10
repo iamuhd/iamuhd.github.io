@@ -13,7 +13,23 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background-size: 200% 200%;
+            animation: backgroundShift 15s ease infinite;
         }
+        
+        .body-light {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+        }
+
+        /* Cool animated background effect */
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         /* Hide all page sections by default */
         .page-section {
             display: none;
@@ -22,58 +38,151 @@
         .page-section.active {
             display: block;
         }
-        /* Style for the active navigation link */
-        .nav-link.active {
-            color: #67e8f9; /* Cyan for dark theme */
+        
+        /* Style for the active navigation link on light theme */
+        .nav-link.active-light {
+            color: #b91c1c; /* Red-700 */
             font-weight: 600;
+            position: relative;
         }
-        /* Style for the active navigation link in light theme */
-        body.light-theme .nav-link.active {
-            color: #fbbf24; /* Amber for light theme */
+        .nav-link.active-light::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #b91c1c;
+            animation: underline 0.5s forwards;
+        }
+
+        /* Style for the active navigation link on dark theme */
+        .nav-link.active-dark {
+            color: #67e8f9; /* Cyan */
+            font-weight: 600;
+            position: relative;
+        }
+        .nav-link.active-dark::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #67e8f9;
+            animation: underline 0.5s forwards;
+        }
+        
+        @keyframes underline {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        /* Custom styling for the logo to make it pop */
+        #header-initials {
+            transition: color 0.3s ease;
+            text-shadow: 0 0 10px rgba(103, 232, 249, 0.5);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        /* CSS for the blur effect on cards */
+        .card-blurry-dark {
+            background-color: rgba(30, 41, 59, 0.8); /* a bit of transparency */
+            backdrop-filter: blur(10px);
+        }
+
+        .card-blurry-light {
+            background-color: rgba(241, 245, 249, 0.8); /* a bit of transparency */
+            backdrop-filter: blur(10px);
+        }
+
+        /* Ensure the mobile menu is on top of everything */
+        #mobile-menu {
+            z-index: 1000;
+        }
+
+        /* Styles for the mobile dropdown based on theme */
+        .mobile-menu-dark {
+            background-color: #1e293b;
+            color: #f1f5f9;
+            border-bottom-color: #475569;
+        }
+
+        .mobile-menu-dark .nav-link:hover {
+            background-color: #334155;
+        }
+
+        .mobile-menu-light {
+            background-color: #cbd5e1;
+            color: #1e293b;
+            border-bottom-color: #94a3b8;
+        }
+
+        .mobile-menu-light .nav-link:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* Custom style for the download button */
+        .download-button {
+            transition: color 0.3s ease-in-out;
+        }
+        .download-button-dark:hover {
+            color: #cbd5e1; /* slate-300 */
+        }
+        .download-button-light:hover {
+            color: #b91c1c; /* red-700 */
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-200">
+<body class="bg-slate-900 text-slate-100">
     <!-- Header section with navigation links -->
-    <header class="p-4 md:p-6 flex justify-between items-center bg-slate-900 border-b border-slate-700 sticky top-0 z-50 transition-colors duration-500">
-        <!-- 
-            The `id` is used by JavaScript to change the text content.
-            The responsive classes ensure the font size is appropriate for all devices.
-        -->
-        <h1 class="text-xl md:text-2xl font-bold text-cyan-300" id="header-initials">UHD</h1>
-        <!-- Hamburger menu for mobile view -->
-        <div class="md:hidden">
-            <button id="mobile-menu-button" class="text-slate-400 hover:text-cyan-300 transition-colors">
-                <i class="fa-solid fa-bars text-2xl"></i>
-            </button>
+    <header class="p-4 md:p-6 flex flex-col md:flex-row justify-between items-center bg-slate-900 border-b border-slate-700 sticky top-0 z-50 rounded-b-xl transition-colors duration-500">
+        <div class="w-full md:w-auto flex justify-between items-center">
+            <!-- Container for the image and text, using flexbox for alignment -->
+            <div class="flex items-center">
+                <!-- Image next to the title -->
+                <!-- The image source will be updated dynamically by JavaScript -->
+                <img id="header-image" class="w-10 h-10 md:w-12 md:h-12 rounded-full mr-3" src="images/avatar.png" alt="Profile Image" />
+                <h1 class="text-xl md:text-2xl font-bold text-cyan-300" id="header-initials">UHD</h1>
+            </div>
+            <!-- Hamburger menu for mobile view -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-slate-400 hover:text-cyan-300 transition-colors">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
         </div>
         <!-- Desktop navigation -->
         <nav id="desktop-nav" class="hidden md:flex gap-4 items-center">
-            <button onclick="showPage('about-me', this)" class="nav-link active hover:text-cyan-300 transition-colors">About Me</button>
-            <button onclick="showPage('education', this)" class="nav-link hover:text-cyan-300 transition-colors">Education</button>
-            <button onclick="showPage('achievements', this)" class="nav-link hover:text-cyan-300 transition-colors">Achievements</button>
-            <span class="text-slate-500">|</span>
-            <button onclick="showPage('services', this)" class="nav-link hover:text-amber-500 transition-colors text-slate-400">Services</button>
-            <button onclick="showPage('contact', this)" class="nav-link hover:text-amber-500 transition-colors text-slate-400">Contact</button>
+            <button onclick="showPage('about-me', this)" class="nav-link text-cyan-300 hover:text-cyan-300 transition-colors">About Me</button>
+            <button onclick="showPage('education', this)" class="nav-link text-slate-400 hover:text-cyan-300 transition-colors">Education</button>
+            <button onclick="showPage('achievements', this)" class="nav-link text-slate-400 hover:text-cyan-300 transition-colors">Achievements</button>
+            <span class="text-slate-400">|</span>
+            <button onclick="showPage('services', this)" class="nav-link text-slate-400 hover:text-red-800 transition-colors">Services</button>
+            <button onclick="showPage('contact', this)" class="nav-link text-slate-400 hover:text-red-800 transition-colors">Contact</button>
+        </nav>
+        <!-- Mobile dropdown menu -->
+        <nav id="mobile-menu" class="hidden w-full md:hidden flex-col border-b border-slate-700 p-4 transition-colors rounded-xl duration-500">
+            <button onclick="showPage('about-me', this)" class="nav-link text-left p-2 rounded-xl hover:bg-slate-700 transition-colors">About Me</button>
+            <button onclick="showPage('education', this)" class="nav-link text-left p-2 rounded-xl hover:bg-slate-700 transition-colors">Education</button>
+            <button onclick="showPage('achievements', this)" class="nav-link text-left p-2 rounded-xl hover:bg-slate-700 transition-colors">Achievements</button>
+            <hr class="my-2 border-slate-700" />
+            <button onclick="showPage('services', this)" class="nav-link text-left p-2 rounded-xl hover:bg-slate-200 transition-colors">Services</button>
+            <button onclick="showPage('contact', this)" class="nav-link text-left p-2 rounded-xl hover:bg-slate-200 transition-colors">Contact</button>
         </nav>
     </header>
-
-    <!-- Mobile dropdown menu -->
-    <nav id="mobile-menu" class="hidden md:hidden flex-col bg-slate-800 text-slate-200 border-b border-slate-700 p-4 transition-colors duration-500">
-        <button onclick="showPage('about-me', this)" class="nav-link text-left p-2 rounded hover:bg-slate-700 transition-colors">About Me</button>
-        <button onclick="showPage('education', this)" class="nav-link text-left p-2 rounded hover:bg-slate-700 transition-colors">Education</button>
-        <button onclick="showPage('achievements', this)" class="nav-link text-left p-2 rounded hover:bg-slate-700 transition-colors">Achievements</button>
-        <hr class="my-2 border-slate-700" />
-        <button onclick="showPage('services', this)" class="nav-link text-left p-2 rounded hover:bg-slate-700 transition-colors">Services</button>
-        <button onclick="showPage('contact', this)" class="nav-link text-left p-2 rounded hover:bg-slate-700 transition-colors">Contact</button>
-    </nav>
     
     <main class="container mx-auto p-4 md:p-8">
         <!-- About Me Section -->
         <section id="about-me" class="page-section active pt-8 md:pt-16">
             <div class="flex flex-col items-center gap-8 md:gap-16">
-                <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-lg border-4 border-cyan-300">
-                    <img src="images/2024-12-27-10-22-42-707 (1).jpg" alt="Profile" class="w-full h-full object-cover" />
+                <!-- Circular profile image with no border -->
+                <div class="w-48 h-48 md:w-64 md:h-64 overflow-hidden rounded-full">
+                    <img src="images/pic.png" alt="Profile" class="w-full h-full object-cover" />
                 </div>
                 <div class="text-center">
                     <h2 class="text-4xl md:text-6xl font-extrabold mb-2 text-white">
@@ -84,13 +193,13 @@
                         I am an AI student and a passionate Windows Application Developer, specializing in Java (JavaFX, Maven, Apache POI), Python, and C. My goal is to become a professional AI, ML, and Robotics Engineer.
                     </p>
                     <div class="mt-6 flex justify-center gap-6">
-                        <a href="https://github.com/iamuhd" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                        <a href="https://github.com/iamuhd" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-100 transition-colors">
                             <i class="fa-brands fa-github text-2xl"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/umair-hassan-296261341/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                        <a href="https://www.linkedin.com/in/umair-hassan-296261341/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-100 transition-colors">
                             <i class="fa-brands fa-linkedin text-2xl"></i>
                         </a>
-                        <a href="mailto:udhaunroo@gmail.com" class="hover:text-white transition-colors">
+                        <a href="mailto:udhaunroo@gmail.com" class="text-slate-400 hover:text-slate-100 transition-colors">
                             <i class="fa-solid fa-envelope text-2xl"></i>
                         </a>
                     </div>
@@ -109,33 +218,33 @@
         </section>
 
         <!-- Education & Skills Section -->
-        <section id="education" class="page-section pt-16 md:pt-24">
+        <section id="education" class="page-section pt-16 md:pt-24 bg-slate-900 text-slate-100">
             <div class="flex items-center justify-center gap-3 mb-8">
                 <i class="fa-solid fa-graduation-cap text-cyan-300 text-3xl"></i>
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-white">Education & Skills</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 md:col-span-1 lg:col-span-1">
+                <div class="card-blurry-dark rounded-xl p-6 shadow-xl border border-cyan-300 card-hover transition-all duration-300 md:col-span-1 lg:col-span-1">
                     <h4 class="text-2xl font-semibold mb-4 text-cyan-300">My Education</h4>
                     <div class="space-y-6">
-                        <div class="border-b border-slate-700 pb-4 last:border-b-0">
+                        <div class="border-b border-slate-700 pb-4 rounded-xl last:border-b-0">
                             <h5 class="text-xl font-bold text-white">Bachelors of Science in Artificial Intelligence</h5>
                             <p class="text-slate-400">IQRA University, Main Campus | 2024-Present</p>
                             <p class="text-sm text-slate-500 mt-1">Current CGPA: 3.49</p>
                         </div>
-                        <div class="border-b border-slate-700 pb-4 last:border-b-0">
+                        <div class="border-b border-slate-700 pb-4 rounded-xl last:border-b-0">
                             <h5 class="text-xl font-bold text-white">Intermediate-Pre Medical</h5>
                             <p class="text-slate-400">Bahria College, DHA Campus | 2022-2024</p>
                             <p class="text-sm text-slate-500 mt-1">Board of Intermediate Education Karachi</p>
                         </div>
-                        <div class="border-b border-slate-700 pb-4 last:border-b-0">
+                        <div class="border-b border-slate-700 pb-4 rounded-xl last:border-b-0">
                             <h5 class="text-xl font-bold text-white">Matriculation-Science</h5>
                             <p class="text-slate-400">Community Based High School, TandoJam | 2020-2022</p>
                             <p class="text-sm text-slate-500 mt-1">Board of Intermediate and Secondary Education Hyderabad</p>
                         </div>
                     </div>
                 </div>
-                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 md:col-span-1 lg:col-span-2">
+                <div class="card-blurry-dark rounded-xl p-6 shadow-xl border border-cyan-300 card-hover transition-all duration-300 md:col-span-1 lg:col-span-2">
                     <h4 class="text-2xl font-semibold mb-4 text-cyan-300">Skills & Technologies</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
@@ -181,43 +290,43 @@
         </section>
 
         <!-- Achievements Section -->
-        <section id="achievements" class="page-section pt-16 md:pt-24">
+        <section id="achievements" class="page-section pt-16 md:pt-24 bg-slate-900 text-slate-100">
             <div class="flex items-center justify-center gap-3 mb-8">
                 <i class="fa-solid fa-trophy text-cyan-300 text-3xl"></i>
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-white">My Achievements</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                <div class="card-blurry-dark rounded-xl p-6 shadow-xl border border-cyan-300 card-hover transition-all duration-300">
                     <h3 class="text-xl font-bold text-cyan-300 mb-2">QuickStart: From Algorithm Design to Working Prototype</h3>
                     <p class="text-slate-400 mb-2">An online non-credit course authorized by HEC, Pakistan.</p>
                     <p class="text-sm text-slate-500">July 2025</p>
                 </div>
-                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                <div class="card-blurry-dark rounded-xl p-6 shadow-xl border border-cyan-300 card-hover transition-all duration-300">
                     <h3 class="text-xl font-bold text-cyan-300 mb-2">IOT for Everyone</h3>
                     <p class="text-slate-400 mb-2">An online non-credit course authorized by HEC, Pakistan.</p>
                     <p class="text-sm text-slate-500">July 2025</p>
                 </div>
-                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                <div class="card-blurry-dark rounded-xl p-6 shadow-xl border border-cyan-300 card-hover transition-all duration-300">
                     <h3 class="text-xl font-bold text-cyan-300 mb-2">AI Developer Professional Certificate (IBM)</h3>
                     <p class="text-slate-400 mb-2">Ongoing professional certificate from IBM.</p>
                     <p class="text-sm text-slate-500">ONGOING</p>
                 </div>
-                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                <div class="card-blurry-dark rounded-xl p-6 shadow-xl border border-cyan-300 card-hover transition-all duration-300">
                     <h3 class="text-xl font-bold text-cyan-300 mb-2">Generative AI Engineering Professional Certificate (IBM)</h3>
                     <p class="text-slate-400 mb-2">Ongoing professional certificate from IBM.</p>
                     <p class="text-sm text-slate-500">ONGOING</p>
                 </div>
-                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                <div class="card-blurry-dark rounded-xl p-6 shadow-xl border border-cyan-300 card-hover transition-all duration-300">
                     <h3 class="text-xl font-bold text-cyan-300 mb-2">Foundation of Cyber Security Course Certificate</h3>
                     <p class="text-slate-400 mb-2">Course certificate from Google.</p>
                     <p class="text-sm text-slate-500">August 2025</p>
                 </div>
-                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                <div class="card-blurry-dark rounded-xl p-6 shadow-xl border border-cyan-300 card-hover transition-all duration-300">
                     <h3 class="text-xl font-bold text-cyan-300 mb-2">Introduction to Python Course Certificate</h3>
                     <p class="text-slate-400 mb-2">Course certificate from the University of Pennsylvania.</p>
                     <p class="text-sm text-slate-500">August 2025</p>
                 </div>
-                <div class="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-105">
+                <div class="card-blurry-dark rounded-xl p-6 shadow-xl border border-cyan-300 card-hover transition-all duration-300">
                     <h3 class="text-xl font-bold text-cyan-300 mb-2">Introduction to Programming with Python and Java</h3>
                     <p class="text-slate-400 mb-2">Specialized certificate from the University of Pennsylvania.</p>
                     <p class="text-sm text-slate-500">ONGOING</p>
@@ -226,67 +335,67 @@
         </section>
 
         <!-- Services & Projects Section -->
-        <section id="services" class="page-section pt-16 md:pt-24 bg-slate-200 text-zinc-800 hidden-section">
+        <section id="services" class="page-section pt-16 md:pt-24 bg-slate-50 text-zinc-900">
             <div class="flex items-center justify-center gap-3 mb-8">
-                <i class="fa-solid fa-briefcase text-amber-500 text-3xl"></i>
+                <i class="fa-solid fa-briefcase text-red-700 text-3xl"></i>
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-zinc-900">Services</h2>
             </div>
             <div class="max-w-4xl mx-auto text-center mb-12">
-                <h3 class="text-5xl font-extrabold tracking-wide text-amber-500 mb-2">ع Studios</h3>
-                <p class="text-zinc-600">
+                <h3 class="text-5xl font-extrabold tracking-wide text-red-700 mb-2">ع Studios</h3>
+                <p class="text-zinc-700">
                     Welcome to ع Studios, where we bring your digital ideas to life. We specialize in creating robust Windows desktop applications, visually appealing front-end websites, and providing professional project documentation to ensure clarity and success. Our experience ranges from banking applications to community platforms and food delivery websites.
                 </p>
             </div>
             <h2 class="text-3xl md:text-4xl font-bold text-center text-zinc-900 mb-8">My Services</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
-                    <div class="flex items-center mb-4 text-amber-500">
+                <div class="card-blurry-light rounded-xl p-6 shadow-xl border border-red-700 card-hover transition-all duration-300">
+                    <div class="flex items-center mb-4 text-red-700">
                         <i class="fa-solid fa-wrench text-2xl"></i>
                         <h3 class="text-xl font-bold ml-3">Windows App Development</h3>
                     </div>
-                    <p class="text-slate-300">Developing robust desktop applications for the Windows platform using JavaFX, Apache POI, and other Java libraries.</p>
+                    <p class="text-zinc-600">Developing robust desktop applications for the Windows platform using JavaFX, Apache POI, and other Java libraries.</p>
                 </div>
-                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
-                    <div class="flex items-center mb-4 text-amber-500">
+                <div class="card-blurry-light rounded-xl p-6 shadow-xl border border-red-700 card-hover transition-all duration-300">
+                    <div class="flex items-center mb-4 text-red-700">
                         <i class="fa-solid fa-briefcase text-2xl"></i>
                         <h3 class="text-xl font-bold ml-3">Project Documentation</h3>
                     </div>
-                    <p class="text-slate-300">Providing detailed and professional project documentation and reports for a clear understanding of the project scope and functionality.</p>
+                    <p class="text-zinc-600">Providing detailed and professional project documentation and reports for a clear understanding of the project scope and functionality.</p>
                 </div>
-                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
-                    <div class="flex items-center mb-4 text-amber-500">
+                <div class="card-blurry-light rounded-xl p-6 shadow-xl border border-red-700 card-hover transition-all duration-300">
+                    <div class="flex items-center mb-4 text-red-700">
                         <i class="fa-solid fa-wrench text-2xl"></i>
                         <h3 class="text-xl font-bold ml-3">Front End Development</h3>
                     </div>
-                    <p class="text-slate-300">Creating visually appealing and functional websites using a combination of HTML, CSS, and JavaScript with jQuery.</p>
+                    <p class="text-zinc-600">Creating visually appealing and functional websites using a combination of HTML, CSS, and JavaScript with jQuery.</p>
                 </div>
             </div>
-            <hr class="my-16 border-amber-500" />
+            <hr class="my-16 border-slate-300" />
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">Projects</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/600x400/292524/e7e5e4?text=Banking+App" alt="Windows Banking Application" class="w-full rounded-lg mb-4" />
-                    <h3 class="text-xl font-bold text-amber-500 mb-2">Windows Banking Application</h3>
-                    <p class="text-slate-300 mb-4">A Windows desktop application for banking, developed using Java (JavaFX and apache.poi).</p>
-                    <a href="https://github.com/iamuhd/Banking_Application_Prototype_Using_JAVA_with-.xlsx_File_Database" target="_blank" rel="noopener noreferrer" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                <div class="card-blurry-light rounded-xl p-6 shadow-xl border border-red-700 card-hover transition-all duration-300">
+                    <img src="https://placehold.co/600x400/292524/e7e5e4?text=Banking+App" alt="Windows Banking Application" class="w-full rounded-xl mb-4" />
+                    <h3 class="text-xl font-bold text-red-700 mb-2">Windows Banking Application</h3>
+                    <p class="text-zinc-600 mb-4">A Windows desktop application for banking, developed using Java (JavaFX and apache.poi).</p>
+                    <a href="https://github.com/iamuhd/Banking_Application_Prototype_Using_JAVA_with-.xlsx_File_Database" target="_blank" rel="noopener noreferrer" class="inline-block bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-6 rounded-full transition-colors">
                         View Project
                     </a>
                 </div>
-                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/600x400/292524/e7e5e4?text=Wish+Dish+Website" alt="Wish Dish Food Delivery Website" class="w-full rounded-lg mb-4" />
-                    <h3 class="text-xl font-bold text-amber-500 mb-2">Wish Dish Food Delivery Website</h3>
-                    <p class="text-slate-300 mb-4">A food and fast food delivery service website, built using HTML, CSS, and JavaScript (jQuery).</p>
-                    <a href="https://iamuhd.github.io/wishdish.github.io/" target="_blank" rel="noopener noreferrer" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                <div class="card-blurry-light rounded-xl p-6 shadow-xl border border-red-700 card-hover transition-all duration-300">
+                    <img src="https://placehold.co/600x400/292524/e7e5e4?text=Wish+Dish+Website" alt="Wish Dish Food Delivery Website" class="w-full rounded-xl mb-4" />
+                    <h3 class="text-xl font-bold text-red-700 mb-2">Wish Dish Food Delivery Website</h3>
+                    <p class="text-zinc-600 mb-4">A food and fast food delivery service website, built using HTML, CSS, and JavaScript (jQuery).</p>
+                    <a href="https://iamuhd.github.io/wishdish.github.io/" target="_blank" rel="noopener noreferrer" class="inline-block bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-6 rounded-full transition-colors">
                         View Project
                     </a>
                 </div>
-                <div class="bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/600x400/292524/e7e5e4?text=Skill+Sharing+App" alt="Skill Sharing Community Platform" class="w-full rounded-lg mb-4" />
-                    <h3 class="text-xl font-bold text-amber-500 mb-2">Skill Sharing Community Platform</h3>
-                    <p class="text-slate-300 mb-4">A Windows app for a skill-sharing community, built with Java (JavaFX).</p>
-                    <a href="https://github.com/iamuhd/Skill-Sharing-Platform-Java-JavaFx" target="_blank" rel="noopener noreferrer" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                <div class="card-blurry-light rounded-xl p-6 shadow-xl border border-red-700 card-hover transition-all duration-300">
+                    <img src="https://placehold.co/600x400/292524/e7e5e4?text=Skill+Sharing+App" alt="Skill Sharing Community Platform" class="w-full rounded-xl mb-4" />
+                    <h3 class="text-xl font-bold text-red-700 mb-2">Skill Sharing Community Platform</h3>
+                    <p class="text-zinc-600 mb-4">A Windows app for a skill-sharing community, built with Java (JavaFX).</p>
+                    <a href="https://github.com/iamuhd/Skill-Sharing-Platform-Java-JavaFx" target="_blank" rel="noopener noreferrer" class="inline-block bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-6 rounded-full transition-colors">
                         View Project
                     </a>
                 </div>
@@ -294,46 +403,46 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="page-section pt-16 md:pt-24 text-center bg-slate-200 text-zinc-800 hidden-section">
+        <section id="contact" class="page-section pt-16 md:pt-24 text-center bg-slate-50 text-zinc-900">
             <div class="flex items-center justify-center gap-3 mb-4">
-                <i class="fa-solid fa-phone text-amber-500 text-3xl"></i>
+                <i class="fa-solid fa-phone text-red-700 text-3xl"></i>
                 <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">To Avail Services</h2>
             </div>
-            <p class="max-w-2xl mx-auto text-md md:text-lg text-zinc-600 mb-8">
+            <p class="max-w-2xl mx-auto text-md md:text-lg text-zinc-700 mb-8">
                 Please fill out the form below to get in touch about a project or service.
             </p>
-            <div class="mt-16 md:mt-24 max-w-xl mx-auto bg-zinc-800 text-slate-100 rounded-xl p-6 shadow-xl border border-amber-500 text-left">
+            <div class="mt-16 md:mt-24 max-w-xl mx-auto card-blurry-light text-zinc-900 rounded-xl p-6 shadow-xl border border-red-700 text-left">
                 <form 
                     action="https://formspree.io/f/movlyjpw"
                     method="POST" 
                     class="space-y-4"
                 >
                     <div>
-                        <label for="email" class="block text-sm font-medium text-amber-500 mb-1">Your Email</label>
+                        <label for="email" class="block text-sm font-medium text-red-700 mb-1">Your Email</label>
                         <input 
                             type="email" 
                             name="email" 
                             id="email" 
                             required 
-                            class="w-full p-2 rounded-lg bg-zinc-700 text-slate-200 border border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500" 
+                            class="w-full p-2 rounded-xl bg-slate-200 text-zinc-800 border border-red-700 focus:outline-none focus:ring-2 focus:ring-red-700" 
                             placeholder="you@example.com"
                         />
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-amber-500 mb-1">Message</label>
+                        <label for="message" class="block text-sm font-medium text-red-700 mb-1">Message</label>
                         <textarea 
                             name="message" 
                             id="message" 
                             rows="4" 
                             required 
-                            class="w-full p-2 rounded-lg bg-zinc-700 text-slate-200 border border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500" 
+                            class="w-full p-2 rounded-xl bg-slate-200 text-zinc-800 border border-red-700 focus:outline-none focus:ring-2 focus:ring-red-700" 
                             placeholder="Hi Jane, I'd like to talk about..."
                         ></textarea>
                     </div>
                     <div class="text-center">
                         <button 
                             type="submit" 
-                            class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg"
+                            class="inline-block bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg"
                         >
                             Send Message
                         </button>
@@ -344,115 +453,173 @@
     </main>
 
     <!-- Footer -->
-    <footer class="p-4 md:p-6 text-center text-sm text-slate-500 border-t border-slate-700 mt-16 md:mt-24 transition-colors duration-500">
+    <footer class="p-4 md:p-6 text-center text-sm text-slate-500 border-t border-slate-700 mt-16 md:mt-24 rounded-t-xl transition-colors duration-500">
+        <nav class="flex flex-wrap justify-center gap-4 mb-4 items-center">
+            <button onclick="showPage('about-me', this)" class="nav-link text-slate-400 hover:text-cyan-300 transition-colors">About Me</button>
+            <button onclick="showPage('education', this)" class="nav-link text-slate-400 hover:text-cyan-300 transition-colors">Education</button>
+            <button onclick="showPage('achievements', this)" class="nav-link text-slate-400 hover:text-cyan-300 transition-colors">Achievements</button>
+            <button onclick="showPage('services', this)" class="nav-link text-slate-400 hover:text-red-800 transition-colors">Services</button>
+            <button onclick="showPage('contact', this)" class="nav-link text-slate-400 hover:text-red-800 transition-colors">Contact</button>
+            <!-- Download CV button added here -->
+            <a href="Umair_Hassan_CV.pdf" download class="download-button-dark download-button px-4 py-2 rounded-full text-white bg-cyan-600 hover:bg-cyan-700 transition-colors duration-300 shadow-md">
+                Download CV
+            </a>
+        </nav>
         &copy; 2025 Umair Hassan. All rights reserved.
     </footer>
 
-    <!-- JavaScript for page navigation and mobile menu -->
+    <!-- JavaScript for page navigation and theme logic -->
     <script>
-        // Get elements for mobile menu
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        const allNavButtons = document.querySelectorAll('.nav-link');
-
-        // Function to toggle the mobile menu's visibility
+        
         function toggleMobileMenu() {
             mobileMenu.classList.toggle('hidden');
+            // The following ensures the dropdown is not hidden by other elements
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.style.position = 'fixed';
+                mobileMenu.style.top = document.querySelector('header').offsetHeight + 'px';
+                mobileMenu.style.left = '0';
+                mobileMenu.style.width = '100%';
+            } else {
+                mobileMenu.style.position = 'static';
+            }
         }
 
-        // Add event listener to the mobile menu button
-        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        // Close the mobile menu when clicking outside of it
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target) && !mobileMenu.classList.contains('hidden')) {
+                toggleMobileMenu();
+            }
+        });
 
-        // This function handles the page navigation logic.
         function showPage(pageId, button) {
-            // Close the mobile menu if it's open
             if (!mobileMenu.classList.contains('hidden')) {
                 toggleMobileMenu();
             }
-
-            // Get all page sections and hide them.
+            
             const pages = document.querySelectorAll('.page-section');
             pages.forEach(page => page.classList.remove('active'));
-
-            // Show the selected page.
             document.getElementById(pageId).classList.add('active');
 
-            // Handle header initials change
             const headerInitials = document.getElementById('header-initials');
-            if (pageId === 'services' || pageId === 'contact') {
-                headerInitials.textContent = 'ع Studios';
-            } else {
-                headerInitials.textContent = 'UHD';
-            }
+            const headerImage = document.getElementById('header-image');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileLinks = document.querySelectorAll('#mobile-menu .nav-link');
+            const footerLinks = document.querySelectorAll('footer .nav-link');
+            const downloadButton = document.querySelector('footer .download-button');
 
-            // Handle theme changes for Services and Contact pages
-            const isLightPage = pageId === 'services' || pageId === 'contact';
-            const body = document.body;
-            const header = document.querySelector('header');
-            const footer = document.querySelector('footer');
-
-            if (isLightPage) {
-                body.classList.add('light-theme');
-                body.classList.remove('bg-slate-900', 'text-slate-200');
-                body.classList.add('bg-slate-200', 'text-zinc-800');
-                
-                header.classList.remove('bg-slate-900', 'border-slate-700');
-                header.classList.add('bg-slate-200', 'border-slate-300');
-
-                headerInitials.classList.remove('text-cyan-300');
-                headerInitials.classList.add('text-zinc-800');
-
-                allNavButtons.forEach(link => {
-                    link.classList.remove('text-cyan-300', 'text-slate-400');
-                    link.classList.add('text-zinc-600');
-                });
-
-                footer.classList.remove('text-slate-500', 'border-slate-700');
-                footer.classList.add('text-zinc-600', 'border-slate-300');
-                
-            } else {
-                body.classList.remove('light-theme');
-                body.classList.remove('bg-slate-200', 'text-zinc-800');
-                body.classList.add('bg-slate-900', 'text-slate-200');
-
-                header.classList.remove('bg-slate-200', 'border-slate-300');
-                header.classList.add('bg-slate-900', 'border-slate-700');
-
-                headerInitials.classList.remove('text-zinc-800');
-                headerInitials.classList.add('text-cyan-300');
-
-                allNavButtons.forEach(link => {
-                    link.classList.remove('text-zinc-600', 'text-amber-500');
-                    link.classList.add('text-slate-400');
-                });
-                // Ensure the Services and Contact links retain their original styling on non-light pages
-                const servicesLink = document.querySelector('.nav-link[onclick*="services"]');
-                const contactLink = document.querySelector('.nav-link[onclick*="contact"]');
-                servicesLink.classList.remove('text-slate-400');
-                servicesLink.classList.add('text-amber-500');
-                contactLink.classList.remove('text-slate-400');
-                contactLink.classList.add('text-amber-500');
-
-                footer.classList.remove('text-zinc-600', 'border-slate-300');
-                footer.classList.add('text-slate-500', 'border-slate-700');
-            }
+            // Reset all link styles first
+            navLinks.forEach(link => {
+                link.classList.remove('text-cyan-300', 'text-red-700', 'text-slate-400', 'text-zinc-600');
+                link.classList.remove('hover:text-cyan-300', 'hover:text-red-800');
+                link.classList.remove('active-dark', 'active-light');
+            });
+            document.querySelectorAll('#mobile-menu .nav-link').forEach(link => {
+                link.classList.remove('hover:bg-slate-700', 'hover:bg-slate-200');
+            });
+            footerLinks.forEach(link => {
+                link.classList.remove('text-cyan-300', 'text-red-700', 'text-slate-400', 'text-zinc-600');
+                link.classList.remove('hover:text-cyan-300', 'hover:text-red-800');
+                link.classList.remove('active-dark', 'active-light');
+            });
             
-            // Remove active class from all links and add it to the clicked one.
-            const allNavLinks = document.querySelectorAll('.nav-link');
-            allNavLinks.forEach(link => link.classList.remove('active'));
-            button.classList.add('active');
+            // Remove all card blur classes and mobile menu theme classes
+            document.querySelectorAll('.card-blurry-dark, .card-blurry-light').forEach(card => {
+                card.classList.remove('card-blurry-dark', 'card-blurry-light');
+            });
+            mobileMenu.classList.remove('mobile-menu-dark', 'mobile-menu-light');
+            downloadButton.classList.remove('download-button-dark', 'download-button-light');
+
+            if (pageId === 'about-me' || pageId === 'education' || pageId === 'achievements') {
+                // Apply dark theme
+                document.body.classList.remove('body-light', 'text-zinc-900');
+                document.body.classList.add('bg-slate-900', 'text-slate-100');
+                
+                document.querySelector('header').classList.remove('bg-slate-50', 'border-slate-300');
+                document.querySelector('header').classList.add('bg-slate-900', 'border-slate-700');
+                
+                document.querySelector('footer').classList.remove('text-zinc-500', 'border-slate-300');
+                document.querySelector('footer').classList.add('text-slate-500', 'border-slate-700');
+
+                // Swapped logo: 'UHD' on dark pages
+                headerInitials.textContent = 'UHD';
+                headerInitials.classList.remove('text-red-700');
+                headerInitials.classList.add('text-cyan-300');
+                headerInitials.style.textShadow = '0 0 10px rgba(103, 232, 249, 0.5)';
+                headerImage.src = 'images/avatar.png'; // Avatar image for dark pages
+                headerImage.alt = 'Profile Avatar';
+                
+                // Style nav links for dark theme
+                navLinks.forEach(link => {
+                    link.classList.add('text-slate-400', 'hover:text-cyan-300');
+                });
+                // Find the clicked button and apply the active class
+                document.querySelectorAll(`[onclick*="${pageId}"]`).forEach(el => el.classList.add('active-dark'));
+
+                mobileMenu.classList.add('mobile-menu-dark');
+                mobileLinks.forEach(link => link.classList.add('hover:bg-slate-700'));
+                
+                document.querySelector('#desktop-nav > span').classList.remove('text-slate-500');
+                document.querySelector('#desktop-nav > span').classList.add('text-slate-400');
+
+                // Apply dark theme to card backgrounds
+                document.querySelectorAll('.page-section.active .rounded-xl').forEach(card => card.classList.add('card-blurry-dark'));
+
+                downloadButton.classList.add('download-button-dark');
+
+            } else {
+                // Apply light theme
+                document.body.classList.remove('bg-slate-900', 'text-slate-100');
+                document.body.classList.add('body-light', 'text-zinc-900');
+
+                document.querySelector('header').classList.remove('bg-slate-900', 'border-slate-700');
+                document.querySelector('header').classList.add('bg-slate-50', 'border-slate-300');
+
+                document.querySelector('footer').classList.remove('text-slate-500', 'border-slate-700');
+                document.querySelector('footer').classList.add('text-zinc-500', 'border-slate-300');
+                
+                // Swapped logo: 'ع Studios' on light pages
+                headerInitials.textContent = 'ع Studios';
+                headerInitials.classList.remove('text-cyan-300');
+                headerInitials.classList.add('text-red-700');
+                headerInitials.style.textShadow = '0 0 10px rgba(185, 28, 28, 0.5)';
+                headerImage.src = 'images/logo.png'; 
+                headerImage.alt = 'Studio Logo';
+
+                // Style nav links for light theme
+                navLinks.forEach(link => {
+                    link.classList.add('text-zinc-600', 'hover:text-red-800');
+                });
+                // Find the clicked button and apply the active class
+                document.querySelectorAll(`[onclick*="${pageId}"]`).forEach(el => el.classList.add('active-light'));
+
+                mobileMenu.classList.add('mobile-menu-light');
+                mobileLinks.forEach(link => link.classList.add('hover:bg-slate-200'));
+
+                document.querySelector('#desktop-nav > span').classList.remove('text-slate-400');
+                document.querySelector('#desktop-nav > span').classList.add('text-slate-500');
+
+                // Apply light theme to card backgrounds
+                document.querySelectorAll('.page-section.active .rounded-xl').forEach(card => card.classList.add('card-blurry-light'));
+                
+                downloadButton.classList.remove('bg-cyan-600', 'hover:bg-cyan-700');
+                downloadButton.classList.add('bg-red-700', 'hover:bg-red-800');
+                downloadButton.classList.add('download-button-light');
+            }
         }
 
-        // Initialize the icons on page load.
+        mobileMenuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMobileMenu();
+        });
+
         document.addEventListener('DOMContentLoaded', (event) => {
-            // Initially activate the About Me button
             const initialButton = document.querySelector('.nav-link[onclick*="about-me"]');
             if (initialButton) {
-                initialButton.classList.add('active');
+                showPage('about-me', initialButton);
             }
         });
     </script>
 </body>
 </html>
-
-
