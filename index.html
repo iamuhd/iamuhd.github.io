@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" href="images/webicon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
         body {
             font-family: 'Inter', sans-serif;
             transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
@@ -133,6 +134,26 @@
         }
         .download-button-light:hover {
             color: #b91c1c; /* red-700 */
+        }
+        .neon-red {
+            text-shadow:
+                0 0 7px #ffffff84,
+                0 0 10px #ffffff80,
+                0 0 21px #ffffff88,
+                0 0 42px #e3181894,
+                0 0 82px #e3181893,
+                0 0 92px #e318187d,
+                0 0 102px #e3181875,
+                0 0 151px #e318188d;
+        }
+        .neon-red-box-shadow{
+            box-shadow:
+                
+                0 0 7px #ffffff84,
+                0 0 10px #ffffff80,
+                0 0 21px #ffffff88,
+                0 0 32px #000000b1,
+                0 0 52px #00000084;
         }
     </style>
 </head>
@@ -347,18 +368,19 @@
             </div>
         </section>
 
-        <section id="services-contact" class="page-section pt-16 md:pt-24 bg-slate-50 text-zinc-900">
-            <div class="flex items-center justify-center gap-3 mb-8">
-                <i class="fa-solid fa-briefcase text-red-700 text-3xl"></i>
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-zinc-900">Services</h2>
+        <section id="services-contact" class="page-section pt-16 md:pt-0 bg-slate-50 text-zinc-900 relative w-full">
+            <div class="relative bg-cover bg-center h-96 rounded-xl flex items-center justify-center text-center p-4 neon-red-box-shadow" style="background-image: url('img.png');">
+                <div class="absolute inset-0 bg-black rounded-xl opacity-50 backdrop-blur-sm"></div>
+                <div class="relative z-10 text-white">
+                    <br>
+                    <p class="max-w-2xl mx-auto text-lg md:text-xl py-4 neon-red" style="font-weight: bolder;">
+                        Welcome to ع Studios, where we turn your digital ideas into reality through Windows desktop applications, visually stunning front-end websites, and professional project documentation.
+                    </p>
+                    <br>
+                </div>
             </div>
-            <div class="max-w-4xl mx-auto text-center mb-12">
-                <h3 class="text-5xl font-extrabold tracking-wide text-red-700 mb-2">ع Studios</h3>
-                <p class="text-zinc-700">
-                    Welcome to ع Studios, where we bring your digital ideas to life. We specialize in creating robust Windows desktop applications, visually appealing front-end websites, and providing professional project documentation to ensure clarity and success. Our experience ranges from banking applications to community platforms and food delivery websites.
-                </p>
-            </div>
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-zinc-900 mb-8">My Services</h2>
+            <br>
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-zinc-900 mb-8">My Services <i class="fa-solid fa-briefcase text-4xl mb-4"></i></h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="card-blurry-light rounded-xl p-6 shadow-xl border border-red-700 card-hover transition-all duration-300">
                     <div class="flex items-center mb-4 text-red-700">
